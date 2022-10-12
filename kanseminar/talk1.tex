@@ -10,6 +10,7 @@
 \usepackage{diagbox}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{bbm}
 \usepackage{enumerate}
 \theoremstyle{definition}
 \newtheorem*{defn}{Definition}
@@ -23,10 +24,10 @@
 \newtheorem*{rmks}{Remarks}
 \newtheorem*{lt}{Last time}
 }
-\newtheorem*{lem}{Lemma}
+\newtheorem{lem}{Lemma}
 \usepackage{color}
 \usepackage{CJK}
-\title{Kan Seminar Talk1}
+\title{Kan Seminar Talk1: Brown Representability Theorem about Cohomology Theories}
 \author{Xiyu Zhai}
 \date{}							% Activate to display a given date or no date
 
@@ -34,31 +35,238 @@
 \maketitle
 \tableofcontents
 
-\appendix
-\section{Hatcher}
+\section{Introduction}
 
-\subsection*{1.B $K(G,1)$ Spaces and Graphs of Groups}
+\subsection{Notions}
 
-A path-connected space whose fundamental group is isomorphic to $G$ and has a contractible universal covering space is a $K(G, 1)$ space.
+\begin{defn}[Reduced Suspension]
+	$\Sigma X:=SX/\sim, (x_0,t)\sim (x_0,1)$.
+\end{defn}
 
-$\mathbb{R}P^\infty = K(\mathbb{Z}_2, 1) = S^\infty/ \mathbb{Z}_2$.
+\begin{defn}[Mapping Cylinder]
+	$M_f:=[0,1]\times X\sqcup Y/\sim, (x,1)\sim f(x), (x_0,t)\sim y_0$.
+\end{defn}
 
-We can also construct
-\begin{equation}
-	(z_1,z_2,\cdots) \mapsto e^{2 \pi i/m}(z_1,z_2,\cdots)
-\end{equation}
-to obtain $K(\mathbb{Z}_m, 1)$.
+\begin{rmk}
+	$M_f$ (strongly) deformation retracts to $Y$ and $X$ is a subspace of $M_f$.
+\end{rmk}
 
-$K(G,1)\times K(H,1)=K(G\times H, 1)$.
+\begin{defn}[Reduced Mapping Cylinder]
+	You can guess.
+\end{defn}
+
+\subsection{Motivations}
+
+First motivation is the following fundamental relationship between singular cohomology and Eilenberg-MacLane spaces:
 
 \begin{thm}
-	The homotopy type of a CW complex $K(G,1)$ is uniquely determined by $G$.
+	[Theorem 4.57 the Homotopy Construction of Cohomology] There are natural bijections $T:\langle X, K(G,n)\rangle \to H^n(X;G)$ for all CW complexes $X$ and all $n>0$, with $G$ any abelian group. Such a $T$ has the form $T([f])=f^*(\alpha)$ for a certain distinguished class $\alpha\in H^n(K(G,n);G)$.
 \end{thm}
 
-\subsection*{4.E The Brown Representability Theorem}
+\paragraph{Sketch of Proof} $K(G,n)$ is very concrete, use them to argue that $T\langle -, K(G,n)\rangle$ must agree with $H^n(K;G)$.
+
+Question: in general, what condition we can put on a sequence of CW complexes $K_n$ such that $\langle X, K_n\rangle$ behaves like cohomology?
+
+The natural isomorphism $h^n(X)\approx h^{n+1}(\Sigma X)$ leads to
+\begin{equation}
+	\langle X, K_n\rangle \approx \langle \Sigma X, K_{n+1}\rangle\approx \langle X, \Omega K_{n+1}\rangle
+\end{equation}
+
+\begin{defn}[$\Omega$-spectrum]
+	A sequence of CW complexes $K_n$ such that
+	$K_n$ is weak homotopic to $\Omega K_{n+1}$.
+\end{defn}
 
 \begin{thm}
+[Theorem 4.58 in Allen Hatcher] If $\{K_n\}$ is an $\Omega$-spectrum, then the functors $X\mapsto h^n(X)=\langle X, K_n\rangle$, $n\in \mathbb{Z}$, define a reduced cohomology theory on the category of basepointed CW complexes and basepoint-preserving maps.
+\end{thm}
+
+\begin{eg}
+	[Bott periodicty-topological version]
+	\begin{equation}
+		BU\times \mathbb{Z}\sim \Omega^2 BU.
+	\end{equation}
+\end{eg}
+
+\subsection{Axioms}
+
+For a contravariant functor $h$ from $C$ (category of CW complexes with basepoint) to abelian groups, we define the following axioms
+
+Axiom 1(homotopy invariance)
+
+Axiom 2 (exact sequence)
+for $A\hookrightarrow X$, exact sequence
+		\begin{equation}
+			h(X/A)\to h(X)\to h(A)\text{ is exact}
+		\end{equation}
+
+Axiom 3 (wedge) $h(\vee_\alpha X_\alpha)\simeq \prod_\alpha h(X_\alpha)$ induced by $i_\alpha$
+
+\begin{rmk}
+	These axioms imply Mayer-Vietoris, just like page 162 in Allen Hatcher's book.
+
+	Suppose $X=A\cup B$, $a\in h(A), b\in h(B)$ and $a|_{A\cap B}=b|_{A\cap B}$ then there exists $x\in h(X)$ such that $a=x|_A,b=x|_B$.
+\end{rmk}
+
+\subsection{Main Results}
+
+\begin{defn}[A Reduced Cohomology Theory on the category of CW complexes with basepoint]
+	A sequence of functors $h^n, n\in \mathbb{Z}$ from $\mathcal{C}$ to abelian groups, together with natural isomorphisms $h^n(X)\approx h^{n+1}(\Sigma X)$ for all $X$ in $\mathcal{C}$ such that axiom (i) (ii) (iii) all hold for each $h^n$.
+\end{defn}
+
+\begin{thm}[Theorem 1]
 	Every reduced cohomology theory on the category of basepointed CW complexes and basepoint-preserving maps has the form $h^n(X) = \langle X, K_n\rangle$ for some $\Omega$-spectrum $\{K_n\}$.
 \end{thm}
 
+\begin{thm}[Theorem 2]
+	If $h$ is a contravariant functor from the category of connected base-pointed CW complexes to the category of pointed sets, satisfying the homotopy axiom $(i)$, the Mayer-Vietoris axiom, and the wedge axiom $(iii)$, then there exists a connected CW complex $K$ and an element $u\in h(K)$ such that the transformation $T_u: \langle X, K \rangle \to h(X), T_u(f)=f^*(u)$, is a bijection for all $X$.
+\end{thm}
+
+\section{Proof}
+
+\subsection{Lemmas}
+
+\begin{defn}[$\pi_*$-universal]
+	For a pair $(K, u)$ with $K$ a basepointed connected CW complex and $u\in h(K)$ where $h$ satisfies the axioms of theorem 2, we call it $\pi_*$-universal if for any $i$, $T_u: \pi_i(K)\to h(S^i)$ is an isomorphism.
+\end{defn}
+
+\begin{lem}
+	Given any pair $(Z, z)$ with $Z$ a connected CW complex and $z\in h(Z)$ there exists a $\pi_*$-universal pair $(K, u)$ with $Z$ a subcomplex of $K$ and $u|_Z = z$.
+\end{lem}
+
+\paragraph{Sketch of Proof}
+
+Make $K$ by attaching cells to create and to kill.
+
+\begin{lem}
+	Let $(K, u)$ be a $\pi_*$-universal pair and let $(X, A)$ be a basepointed $CW$ pair. Then for each $x\in h(X)$ and each map $f: A\to K$ with $f^*(u)=x|_A$ there exists a map $g:X\to K$ extending $f$ with $g^*(u)=x$.
+\end{lem}
+
+We shall proceed in four steps:
+\begin{enumerate}[(1)]
+	\item prove that Lemma 1 $\land$ Lemma 2 $\Rightarrow$ Theorem 2
+	\item prove that Theorem 2 $\Rightarrow$ Theorem 1
+	\item prove Lemma 2 $\Rightarrow$ Lemma 1
+	\item prove Lemma 1
+\end{enumerate}
+
+\subsection{Prove that Lemma 1 $\land$ Lemma 2 $\Rightarrow$ Theorem 2}
+
+There are two things to prove, surjectiveness and injectiveness.
+
+\paragraph {Use lemma 1 to get a $\pi_*$-universal pair $(K,u)$.}
+
+\paragraph {Apply lemma 2 to $(X, pt)$ to get surjectiveness.}
+
+\paragraph {Apply lemma 2 to $(X\times I, X\times \partial I)$ to get injectiveness.}
+
+Suppose that $T_u(f_0)=T_u(f_1)$, that is $f^*_0(u)=f^*_1(u)$. Combine $f_0$ and $f_1$ to form a map from $X\times \partial I\to K$ and taking $x$ to be $p^*f_0^*(u)=p^*f_1^*(u)$ where $p$ is the projection $X\times I\to X$. Here $X\times I$ should be the reduced product, with basepoint $\times I$ collapsed to a point. Then the lemma gives a homotopy from $f_0$ to $f_1$.
+
+\subsection{Prove that Theorem 2 $\Rightarrow$ Theorem 1}
+
+\paragraph{Restrict to connected CW complexes.} This is okay because suspension is an isomorphism in any reduced cohomology theory, and the suspension of any CW complex is connected.
+
+\paragraph{Obtain weak homotopy equivalence.} Since $h$ is a cohomology theory, we have naturally
+
+\begin{equation}
+	h^n(X)\approx h^{n+1}(\Sigma X),
+\end{equation}
+
+then naturally
+\begin{equation}
+	\langle X, K_n\rangle\approx\langle \Sigma X, K_{n+1}\rangle\approx\langle X, \Omega K_{n+1}\rangle
+\end{equation}
+
+Apply Yoneda's lemma to the natural bijection $\Phi: \langle X, K_n\rangle\approx\langle X, \Omega K_{n+1}\rangle$ we obtain $\epsilon_n:K_n\to \Omega K_{n+1}$ such that $\epsilon_n$
+ induces $\Phi$. Then it follows easily that $\epsilon_n$ is a weak homotopy equivalence (by taking $X$ to be $S_n$).
+
+(Note: Allen Hatcher doesn't use Yoneda here. He basically reproves Yoneda. Maybe he wants to be clearer.)
+
+Now we get an $\Omega$-spectrum.
+
+\paragraph{Verify $h^n(X)\approx \langle X, K_n\rangle$ is a group isomorphism.} Here $\langle X, K_n\rangle$ has the group structure that comes from identifying it with $\langle X, \Omega K_{n+1}\rangle\approx \langle \Sigma X, \Omega K_n\rangle$.
+
+We have
+\begin{equation}
+	\psi:\Sigma X\to\Sigma X\vee \Sigma X
+\end{equation}
+by collapsing the middle.
+
+This map induces the group structure on the right obviously.
+
+But this also induces the group structure for $h$.
+
+Consider $p_1, p_2$ that collapse one of $\Sigma X$ in $\Sigma X\vee \Sigma X$ resp.
+
+The key trick is: $p_1\circ \psi\sim p_2\circ \psi\sim \mathbbm{1}$.
+
+Then just apply Mayer-Vietoris to see that
+
+(here all $+$ means the original group structure)
+
+$\psi^*((a,b))=\psi^*((a,0))+\psi^*((0,b)) = \psi^* p_1^* a + \psi^* p_2^*b=a+b$.
+
+In Allen Hatcher's book, this was already proved in some form in a previous section.
+
+\subsection{Prove Lemma 1 $\Rightarrow$ Lemma 2}
+
+Let $(K, u)$ be a $\pi_*$-universal pair and let $(X, A)$ be a basepointed $CW$ pair.
+We want to prove for each $x\in h(X)$ and each map $f: A\to K$ with $f^*(u)=x|_A$ there exists a map $g:X\to K$ extending $f$ with $g^*(u)=x$.
+
+\paragraph {Reduce to the case $f$ is the inclusion of a subcomplex.} This is okay because we can replace $K$ by the reduced mapping cylinder of $f$.
+
+\paragraph {Sketch of Proof} Put $K$ and $X$ together to a common larger space $K'$ using Lemma 1 with some $u'\in h(K')$ such that $u'|_K=u$ and $u'|_X=x$. Then prove that $X\hookrightarrow K'$ deformation retracts to $X \to K\subset K'$.
+
+\paragraph {Apply Lemma 1 to get $(K', u')$ from $Z=X\cup K$ with the two copies of $A$ identified.} By Mayer-Vietoris axiom, there exists $z\in h(Z)$ with $z|_X=x$ and $z|_K=u$. Introduce a $\pi_*$-universal pair $(K', u')$ extending from $(Z, z)$ by applying Lemma 1.
+
+\paragraph {Show $X\hookrightarrow K'$ is homotopic to $g: X\to K$ rel $A$.} The inclusion $(K, u)\hookrightarrow (K', u')$ induces an isomorphism on homotopy groups since both $u$ and $u'$ are $\pi_*$-universal, so $K'$ deformation retracts onto $K$ by whitehead. Examining the long exact sequence for the homotopy of the triple $(A, K, K')$ it is not hard to see that the conditions for a relative version of whitehead theorem is satisfied, so $K'$ deformation retracts onto $K$ rel $A$ (this part is not mentioned in Hatchers' book, he just directly reaches this), then $X\hookrightarrow K'$ is homotopic to $g: X\to K\subset K'$ rel $A$.
+
+Then $g^*(u)=x$ holds because
+\begin{equation}
+	g^*(u)=g^*(u'|_K)=u'|_X=(u'|_Z)|_K=z|_K=u.
+\end{equation}
+
+\subsection{Prove Lemma 1}
+
+We first propose a weaker notion than $\pi_*$-universal.
+
+\begin{defn}[$n$-universal]
+	For a pair $(K, u)$ with $K$ a basepointed connected CW complex and $u\in h(K)$ where $h$ satisfies the axioms of theorem 2, we call it $n$-universal if for any $i<n$, $T_u: \pi_i(K)\to h(S^i)$ is an isomorphism and for $i=n$ is surjective.
+\end{defn}
+
+\begin{rmk}
+	$\pi_*$-universal is $n$-universal for all $n$.
+\end{rmk}
+
+We construct $K$ from $Z$ by an inductive process of attaching cells.
+
+Let $K_1=Z\vee\bigvee_\alpha S^1_\alpha$ where $\alpha$ ranges over the elements of $h(S^1)$.
+
+\paragraph{Prove $(K_1, u_1)$ is $1$-universal.} Just by wedge axiom.
+
+For the inductive step, suppose we already have $(K_n, u_n)$ with $u_n$ $n$-universal, $Z\subset K_n$ and $u_n|Z=z$.
+
+Represent each element $\alpha$ in the kernel of $T_{u_n}:\pi_n(K_n)\to h(S^n)$ by a map $f_\alpha: S^n\to K_n$. Let $f=\vee_ \alpha f_\alpha:\vee_\alpha S^n_\alpha\to K_n$. Consider $C_f=M_f/\vee_\alpha S^n_\alpha$. Then set $K_{n+1}=C_f\vee_\beta S_\beta^{n+1}$ where $\beta$ ranges over $h(S^n+1)$.
+
+We now choose $u_{n+1}\in h(K_{n+1})$ such that $u_{n+1}|_{K_n}=u_n$. This is possible by
+\begin{enumerate}[(i)]
+	\item first extend $u_n$ to $C_f$ using Mayer-Vietoris. $C_f$ can be cut in half, with one deforms to $K_n$ and another to a point and the intersection is $\vee_\alpha S_\alpha^n$.
+	\item then extend $u_n$ over $K_{n+1}$ by wedge axiom.
+\end{enumerate}
+
+\paragraph{Prove $(K_{n+1}, u_{n+1})$ is $n+1$-universal.}
+
+We have two goals:
+
+\begin{enumerate}[(i)]
+	\item For $i\le n$, $T_{u_{n+1}}:\pi_i(K)\to h(S^i)$ is an isomorphism.
+	\item For $i=n+1$ $T_{u_{n+1}}:\pi_{i}(K)\to h(S^i)$ is surjective.
+\end{enumerate}
+
+Note that $K_{n+1}$ is obtained from attaching $n+1$-cells, $i<n$ is obvious because nothing changes.
+
+For $i=n$, leave as an exercise. It's like a very basic manuvre.
+
+For $i=n+1$ also quite obvious.
+\appendix
 \end{document}
