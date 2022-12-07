@@ -1,0 +1,300 @@
+%:
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{diagbox}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{eg}{Example}
+\newtheorem{thm}{Theorem}
+\newtheorem*{corol}{Corollary}
+\newtheorem{ex}{Exercise}[section]
+{\theoremstyle{plain}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{rmks}{Remarks}
+\newtheorem*{lt}{Last time}
+}
+\newtheorem*{lem}{Lemma}
+\usepackage{color}
+\usepackage{CJK}
+\title{Nilpotence and Stable Homotopy Theory II}
+\author{Xiyu Zhai}
+\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+This note is adapted from Gabriel Angelini-Knoll's note
+
+\section{Notions}
+
+\subsection{Smash Product}
+
+
+
+\begin{defn}[Smash Product]
+Let $X$ and $Y$ be spaces with base points $x_0,y_0$ resp. The smash product $X\wedge Y$ is the quotient of $X\times Y$ obtained by collapsing $X\times \{y_0\}\cup \{x_0\}\times Y$ to a single point.
+
+$X^{(k)}$ is the $k$-fold iterated smash product of $X$ with itself.
+
+For $f:X\to Y$, $f^{(k)}$ denote the evident map from $X^{(k)}$ to $Y^{(k)}$
+	
+\end{defn}
+
+\subsection{Suspension}
+
+\begin{defn}[Suspension]
+	For $X$ a space with basepoint, $\Sigma X:=X\wedge S^1$
+
+	For $f: X\to Y$, define $\Sigma f:= f\wedge 1_{S^1}: \Sigma X\to \Sigma Y$.
+
+	These constructions can be iterated, denoted by $\Sigma^i X, \Sigma^i f$.
+
+	If $\Sigma^i f$ for some $i$ we say $f$ is \textbf{stably null homotopic}; otherwise it is \textbf{stably essential}.
+
+	One can use the suspension to convert $[X,Y]$ to a graded object $[X,Y]_*$, where $[X,Y]_i=[\Sigma^i X,Y]$. It's also useful to consider the group of stable homotopy classes of maps, $[X,Y]^S_i = \lim\limits_{\rightarrow}[\Sigma^{i+j}X,\Sigma^jY]$.
+\end{defn}
+
+\subsection{Spectrum}
+
+
+\begin{defn}[Spectrum]
+	A spectrum is a sequence of spaces weakly equivalent to CW-complexes $\{E_i\}_{i\in \mathbb{Z}}$ with structure maps $\Sigma E_n\to E_{n+1}$
+\end{defn}
+
+\begin{rmk}
+	$\Sigma E_n\to E_{n+1}$ corresponds to $E_n\to \Omega E_{n+1}$. When this is a weak equivalence, this is an $\Omega$-spectrum.
+\end{rmk}
+
+\begin{defn}[Naive Smash Product for spectra]
+	For spectra $E$ and $F$, the naive smash product is defined by
+	\begin{equation}
+		(E\wedge F)_{2n}=E_n\wedge F_n
+	\end{equation}
+	\begin{equation}
+		(E\wedge F)_{2n+1}= \Sigma E_n\wedge F_n
+	\end{equation}
+	where the map
+	\begin{equation}
+		\Sigma E_n\wedge \Sigma F_n = \Sigma(E\wedge F)_{2n+1}\to (E\wedge F)_{2n+2}=E_{n+1}\wedge F_{n+1}
+	\end{equation}
+	is the smash product of the maps $\Sigma E_n\to E_{n+1}$ and $\Sigma F_n\to F_{n+1}$.
+\end{defn}
+
+\begin{rmk}
+	The correct definition is rather difficult, see J. F. Adams. Stable Homotopy and Generalised Homology. University of Chicago Press, Chicago, 1974.
+
+	But here the only smash products we need are with finite spectra,
+which are always suspension spectra, so the naive definition is
+adequate.
+\end{rmk}
+
+\begin{defn}[Ring Spectrum]
+	A ring spectrum is a spectrum $E$ together with a multiplication map
+	\begin{equation}
+		\mu: E\wedge E\to E
+	\end{equation}
+
+	and a unit map
+	\begin{equation}
+		\eta:S\to E,
+	\end{equation}
+
+	These maps have to satisfy associativity and unitality conditions up to homotopy,
+	\begin{equation}
+		\mu\circ (id\wedge \mu)\sim \mu\circ(\mu\wedge id)
+	\end{equation}
+
+	and
+
+	\begin{equation}
+		\mu\circ(id\wedge \eta)\sim id\sim \mu(\eta\wedge id).
+	\end{equation}
+
+	Examples of ring spectra include those from singular homology with coefficients in a ring, complex cobordism, K-theory and Morava K-theory.
+\end{defn}
+
+\begin{defn}[Function]
+	A function from spectrum $E$ to spectrum $F$ is a sequence of maps from $E_n$ to $F_n$ commuting with structure maps.
+\end{defn}
+
+\begin{defn}[Homotopy]
+	 A homotopy of maps between spectra corresponds to a map $(E\wedge I^+)\to F$ where $I^+$ is the disjoint union $[0,1]\sqcup \{*\}$ with $*$ taken to be the basepoint.
+\end{defn}
+
+\begin{defn}[Stable Homotopy Category]
+	 the category whose objects are spectra and whose morphisms are homotopy classes of maps between spectra
+\end{defn}
+
+\begin{defn}[Brown representability]
+	This is the true clincher about spectra. For $E$ a spectrum and $X$ a space, we define
+	\begin{equation}
+		E_*X=[S,E\wedge X]_*
+	\end{equation}
+	and
+	\begin{equation}
+		E^*=[X,E]_{-*}
+	\end{equation}
+
+	For a pair $(A,X)$, we can just define $E_*(A,X)=E_*(X\cup CA)$.
+
+	The functors $E_*$ ($E^*$) are homology(cohomology) theories on the category of spaces.
+\end{defn}
+
+\section{Nilpotence Theorems}
+
+\subsection{Definition of }
+
+\begin{defn}[Nilpotence]
+	Various forms of nilpotence definitions.
+
+	\begin{enumerate}[1]
+		\item A map $f:S^n\to R$ with $R$ a ring spectrum is nilpotent if $f\in \pi_*R$ is nilpotent.
+		\item A map $f: \Sigma^jF\to F$ is \textit{nilpotent} if $f^t:\Sigma^{jt}F\to F$ is null for some $t\gg 0$.
+		\item A map $f: F\to X$ is \textit{smash nilpotent} if $f^{(n)}:F^{(n)}\to X{(n)}$ is null for some $n\gg 0$.
+	\end{enumerate}
+\end{defn}
+
+\subsection{First cohomology theory detecting nilpotence}
+
+We would like to have some cohomology theory that detects these kind of maps. Ravenel conjectured that $MU$ is the right cohomology to do the job. In 1988 Devinatz, Hopkins and Smith succeeded in proving that this is the case:
+
+\begin{thm}
+	[DHS, Nilpotence and Stable Homotopy Theory I]
+\label{DHS}
+	Suppose that $F$ is finite. Then for any of the three notions, $f$ is nilpotent if $MU_*(f)=0$.
+\end{thm}
+
+\begin{rmk}
+	If the range of $f$ is $p$-local, then $f$ is nilpotent if $BP_*(f)=0$.
+\end{rmk}
+ 
+	We can recover Nishida's theorem as a special case.
+
+	Elements of positive degree of the homotopy groups of spheres are nilpotent.
+
+	In fact, for any $f\in \pi_n(\mathbb{S})$ with $n>0$, its image in $MU_*(\mathbb{S})$ is p-torsion because of Serre finiteness theorem. But $MU_*(\mathbb{S})$ is the Lazard ring, a polynomial ring, so $MU_*(f)$ is zero. Then $f$ is nilpotent.
+ 
+
+\subsection{Refined Nilpotence Theorem}
+
+We can use the Morava K-theories $K(n)$ to break this computation into computations at each prime and each height.
+
+\begin{defn}[Spectra related to BP] The study of a ring is often simplified by passage to its quotients and localizations. The same is true of ring spectra, though constructing quotients and localizations can be difficult. Luckily Brown-Peterson spectrum is easy, using Baas-Sullivan theory of bordism with singularities.
+
+Recall that $BP_*\approx \mathbb{Z}_{(p)}[v_1,\cdots,v_n,\cdots]$ with $|v_n|=2p^{n}-2$ with $\{v_n\}$ the Hazewinkel generators. For $0<n<\infty$ the ring spectra $K(n)$ and $P(n)$ are defined by the isomorphisms
+\begin{equation}
+	K(n)_*\approx \mathbb{F}_p[v_n,v_n^{-1}],
+\end{equation}
+
+\begin{equation}
+	P(n)_*\approx \mathbb{F}_p[v_n, v_{n+1},\cdots],
+\end{equation}
+
+we also set
+\begin{equation}
+	K(0)=H \mathbb{Q},
+\end{equation}
+and
+\begin{equation}
+	K(\infty)= H \mathbb{F}_p
+\end{equation}
+
+\begin{equation}
+	P(0)_*\approx BP_*
+\end{equation}
+\end{defn}
+
+\begin{thm}
+	[Nilpotence theorem refined]
+
+	We will now restrict to $p$-local spectra, though we could have used any finite spectrum and then checked this at its $p$-localizations for each $p$.
+
+	\begin{enumerate}[(1)]
+		\item A map $f:S^n\to R$ regarded as $f\in \pi_*(R)$ where $R$ is a ring spectrum is nilpotent iff $K(n)_*(f)$ is nilpotent for all $0\leq n\leq \infty$.
+		\item A self map $f:\Sigma^kF\to F$ is nilpotent iff $K(n)_*(f)$ is nilpotent for all $0\le n<\infty$.
+		\item A map $f:F\to X$ is smash nilpotent iff $K(n)_*(f)=0$ for all $0\le n<\infty$
+	\end{enumerate}
+\end{thm}
+
+\section{Proof}
+
+\subsection{(iii) $\Rightarrow$ (i)}
+
+\begin{itemize}
+	\item Suppose that $f: S^n\to R$ is nilpotent, then by definition $f\in \pi_*R$ is nilpotent. $K(n)_*(f)$ is the image of $f$ under the Hurewicz homomorphism from $\pi_* R$ to $K(n)_*R$, then $K(n)_*(f)$ is nilpotent.
+	\item Suppose that $K(n)_*(f)$ is nilpotent for all $0\le n\le\infty$. Then $f$ is smash nilpotent. Note that $f^m$ is obtained from composition of the smash product $f^{(m)}: (S^n)^{(m)}\to R^{(m)}$ with the ring multiplication $\mu: R\times R\to R$, so $f^m$ is null homotopic when $f^{(m)}$ is null homotopic then $f$ is nilpotent.
+\end{itemize}
+
+\subsection{(i) $\Rightarrow$ (ii)}
+
+Here we introduce Spanier-Whitehead Duality.
+
+For $f: \Sigma^i F\to F$, we have a dual map
+\begin{equation}
+	D(f):S^i\to D(F)\wedge F =: R
+\end{equation}
+
+where $D(F)=Map(F,S)$ the mapping spectrum from $F$ to $S$.
+
+$R$ is a ring spectrum if $F$ is finite.
+
+Then part ii) follows from part i) since multiplication in the rings
+\begin{equation}
+	\pi_*X\wedge DX \text{ and }K(n)_*X\wedge DX
+\end{equation}
+corresponds, under Spanier-Whitehead duality, to composition in
+\begin{equation}
+	[X,X]_*\text{ and }End_{K(n)*}(K(n)_*X)
+\end{equation}
+
+\subsection{(iii)}
+
+Replacing
+\begin{equation}
+	f:F\to X
+\end{equation}
+with
+\begin{equation}
+	Df:S^0\to DF\wedge X
+\end{equation}
+in part iii) if necessary, we may assue that $F=S^0$. 
+
+\begin{itemize}
+	\item Suppose that $f$ is smash nilpotent, then $1_{BP}\wedge f^{(m)}$ is null homotopic for $m\gg 0$. Then by Bousfield equivalence
+	\begin{equation}
+		\langle BP\rangle=\langle K(0)\rangle\vee\cdots\vee \langle K(n)\rangle\vee \langle 
+		P(n+1)\rangle,
+	\end{equation}
+	we have
+	\begin{equation}
+		K(n)_*(f^{(m)})=0.
+	\end{equation}
+
+	Since $K(n)_*$
+\end{itemize}
+
+\begin{defn}[Bousfield class]
+	A spectrum $X$ is in the Bousfield class of $Y$, denoted by $\langle Y\rangle$ if $X\wedge Y$ is nontrivial.
+\end{defn}
+ 
+ 	The key is to use
+	\begin{equation}
+		\langle BP\rangle= \langle K(0) \vee\cdots\vee K(n) \vee P(n)\rangle
+	\end{equation}
+
+	Also $\lim\limits_{\rightarrow}P(n)=HF_p=K(\infty)$.
+ 
+
+
+\end{document}
